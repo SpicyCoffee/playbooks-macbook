@@ -85,4 +85,3 @@
     - name: Install homebrew_cask_packages
       command: brew install Caskroom/cask/{{ item.name }}
       with_items: homebrew_cask_packages
-      register: cask_result
