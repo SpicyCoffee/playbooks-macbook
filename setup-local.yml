@@ -1,6 +1,3 @@
-# How to use
-# HOMEBREW_CASK_OPTS="--appdir=/Applications" ansible-playbook -i hosts -vv setup-local.yml
-
 - hosts: localhost
   connection: local
   gather_facts: no
