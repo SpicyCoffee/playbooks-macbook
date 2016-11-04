@@ -6,6 +6,7 @@
     homebrew_taps:
       - homebrew/binary
       - homebrew/dupes
+      - caskroom/cask
     homebrew_packages:
       - { name: readline }
       - { name: libtool }
@@ -46,6 +47,7 @@
       - { name: java }
       - { name: slack }
       - { name: alfred }
+      - { name: sequel-pro }
       - { name: vagrant }
       - { name: virtualbox }
     # appstore:
@@ -75,13 +77,20 @@
         }}
       with_items: homebrew_packages
       register: brew_result
-    - name: Make directory to save brew package information
+    - name: Make directory to save brew packages information
       file: path=brew_info state=directory
-    - name: Save brew package information
+    - name: Save brew packages information
       shell: brew info {{ item }} > brew_info/{{ item }}
       with_items: brew_result.results | selectattr('changed') | map(attribute='item') | map(attribute='name') | list
 
     # brew cask
     - name: Install homebrew_cask_packages
-      command: brew install Caskroom/cask/{{ item.name }}
+      homebrew_cask: name={{ item.name }} state={{ item.state|default('installed') }}
       with_items: homebrew_cask_packages
+      register: cask_result
+    - name: Make directory to save cask packages information
+      file: path=cask_info state=directory
+    - name: Save cask packages information
+      shell: brew cask info {{ item }} > cask_info/{{ item }}
+      with_items: cask_result.results | selectattr('changed') | map(attribute='item') | map(attribute='name') | list
+
