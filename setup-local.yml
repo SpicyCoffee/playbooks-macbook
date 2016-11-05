@@ -36,6 +36,7 @@
       - { name: ruby-build }
       - { name: mysql }
       - { name: imagemagick }
+      - { name: mecab }
       - { name: gibo }
       - { name: lua }
       - { name: vim, install_options: with-lua }
