@@ -36,7 +36,8 @@
       - { name: ruby-build }
       - { name: mysql }
       - { name: imagemagick }
-      - { name: npm }
+      - { name: nodebrew }
+      # - { name: npm }
       - { name: mecab }
       - { name: elasticsearch }
       - { name: gibo }
